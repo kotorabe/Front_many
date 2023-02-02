@@ -1,0 +1,17 @@
+FrontOffice : 
+	-XListe des encheres
+	-XListe enchere by id
+	-XListe enchere apres recherche
+	-XDetails de chaque enchere
+	-XLogin 
+	-XSolde utilisateur
+	-XDemande de rechargement+rechargement de compte utilisateur
+	-XAjout d'enchere(invalide si dureeajoute>dureeCategorie)
+	-XSelection enchere 
+	-XEncherir sur un enchere
+	-XBloque l'utilisateur a participer a son propre enchere
+	-historique	
+
+	A corriger :
+		-Token inscription ts mety(vita)
+		-Token Login(vita)

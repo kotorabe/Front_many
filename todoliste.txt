@@ -1,0 +1,15 @@
+to do list rojo projet enchere :
+
+Cote admin : 
+	-Utilisateur_Admin
+	-Rechargement(confirmation de la somme et ajout de la somme dans le compte de l'utilisateur)
+	-Categorie
+	-Commission(Calcul commission)
+	-Solde(par enchere)
+	-Tableau Statistique(order by categorie,by utilisateur(vendeur),by utilisateur(acheteur));
+
+	Fonction : 
+	-liste(Xcategorie,solde,Xrechargement)
+	-insert(Xcategorie,Xcommission,Xrechargement)
+
+	
