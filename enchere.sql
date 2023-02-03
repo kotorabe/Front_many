@@ -20,6 +20,22 @@ INSERT INTO Categorie (categorie) values
                                       ('Bijoux'),
                                       ('Voiture');
 
+CREATE SEQUENCE utilisateur_idutilisateur_seq;
+CREATE TABLE IF NOT EXISTS public.utilisateur
+(
+    idutilisateur integer NOT NULL DEFAULT nextval('utilisateur_idutilisateur_seq'::regclass),
+    nom text COLLATE pg_catalog."default" NOT NULL,
+    prenom text COLLATE pg_catalog."default" NOT NULL,
+    email text COLLATE pg_catalog."default" NOT NULL,
+    mdp text COLLATE pg_catalog."default" NOT NULL,
+    solde_compte double precision DEFAULT 0,
+    CONSTRAINT utilisateur_pkey PRIMARY KEY (idutilisateur)
+);
+INSERT INTO utilisateur (nom, prenom,email,mdp,solde_compte) values
+                                                                 ('Rakoto', 'Hery', 'hery@gmail.com','hery123',1000.5),
+                                                                 ('Jean','Marc','jean@gmail.com','marc123', 3500);
+
+
 CREATE SEQUENCE enchere_idenchere_seq;
 CREATE TABLE IF NOT EXISTS public.enchere
 (
@@ -98,20 +114,17 @@ CREATE TABLE IF NOT EXISTS public.token
     idutilisateur integer
 );
 
-CREATE SEQUENCE utilisateur_idutilisateur_seq;
-CREATE TABLE IF NOT EXISTS public.utilisateur
-(
-    idutilisateur integer NOT NULL DEFAULT nextval('utilisateur_idutilisateur_seq'::regclass),
-    nom text COLLATE pg_catalog."default" NOT NULL,
-    prenom text COLLATE pg_catalog."default" NOT NULL,
-    email text COLLATE pg_catalog."default" NOT NULL,
-    mdp text COLLATE pg_catalog."default" NOT NULL,
-    solde_compte double precision DEFAULT 0,
-    CONSTRAINT utilisateur_pkey PRIMARY KEY (idutilisateur)
-);
-INSERT INTO utilisateur (nom, prenom,email,mdp,solde_compte) values
-                                                                 ('Rakoto', 'Hery', 'hery@gmail.com','hery123',1000.5),
-                                                                 ('Jean','Marc','jean@gmail.com','marc123', 3500);
+CREATE OR REPLACE VIEW public.v_enchere_surencherir
+ AS
+ SELECT enchere.idenchere,
+    enchere.dureeenchere,
+    enchere.description,
+    enchere.dateheureenchere,
+    surencherir.montant
+   FROM enchere,
+    surencherir
+  WHERE enchere.idenchere = surencherir.idenchere;
+
 
 
 CREATE OR REPLACE VIEW public.enchere_solde
@@ -168,32 +181,6 @@ CREATE OR REPLACE VIEW public.v_enchere_categorie
    FROM enchere,
     categorie
   WHERE enchere.idcategorie = categorie.idcategorie;
-
-CREATE OR REPLACE VIEW public.v_enchere_surencherir
- AS
- SELECT enchere.idenchere,
-    enchere.dureeenchere,
-    enchere.description,
-    enchere.dateheureenchere,
-    surencherir.montant
-   FROM enchere,
-    surencherir
-  WHERE enchere.idenchere = surencherir.idenchere;
-
-CREATE OR REPLACE VIEW public.v_utilisateur_rechargement
- AS
- SELECT utilisateur.idutilisateur,
-    utilisateur.nom,
-    utilisateur.prenom,
-    utilisateur.email,
-    utilisateur.mdp,
-    utilisateur.solde_compte,
-    rechargement.montantrecharge,
-    rechargement.dateheurechargement,
-    rechargement.validation
-   FROM utilisateur,
-    rechargement
-  WHERE utilisateur.idutilisateur = rechargement.idutilisateur;
 
 CREATE OR REPLACE VIEW public.v_utilisateur_token
  AS
