@@ -19,7 +19,7 @@ Rechargement {
 
 	public int getIdrechargement() {
 		return idrechargement;
-	} 
+	}
 	public void setIdrechargement(int idrechargement) {
 		this.idrechargement = idrechargement;
 	}

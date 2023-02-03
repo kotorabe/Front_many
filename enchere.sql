@@ -122,6 +122,22 @@ CREATE OR REPLACE VIEW public.enchere_solde
    FROM v_enchere_surencherir
   GROUP BY v_enchere_surencherir.idenchere, v_enchere_surencherir.dateheureenchere;
 
+CREATE OR REPLACE VIEW public.v_utilisateur_rechargement
+ AS
+SELECT utilisateur.idutilisateur,
+       utilisateur.nom,
+       utilisateur.prenom,
+       utilisateur.email,
+       utilisateur.mdp,
+       utilisateur.solde_compte,
+       rechargement.montantrecharge,
+       rechargement.dateheurechargement,
+       rechargement.validation
+FROM utilisateur,
+     rechargement
+WHERE utilisateur.idutilisateur = rechargement.idutilisateur;
+
+
 CREATE OR REPLACE VIEW public.rechargement_non_valide
  AS
  SELECT v_utilisateur_rechargement.idutilisateur,
